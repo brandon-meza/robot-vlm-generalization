@@ -1,0 +1,468 @@
+{
+  "dataset": "airoa-org/airoa-moma",
+  "synthetic_labels_and_groups": false,
+  "skill": {
+    "held_out_operator/finetuned/bf16": {
+      "n": 1503,
+      "accuracy": {
+        "mean": 0.6134397870924817,
+        "lo": 0.5854916167664671,
+        "hi": 0.6401153734766238
+      },
+      "macro_f1": 0.4468238835931502
+    },
+    "held_out_operator/text_only/bf16": {
+      "n": 1503,
+      "accuracy": {
+        "mean": 0.011976047904191617,
+        "lo": 0.004595965832766088,
+        "hi": 0.020436081520835196
+      },
+      "macro_f1": 0.001392272885485555
+    },
+    "held_out_operator/zero_shot/bf16": {
+      "n": 1503,
+      "accuracy": {
+        "mean": 0.20691949434464404,
+        "lo": 0.18407301966787953,
+        "hi": 0.2308768274262286
+      },
+      "macro_f1": 0.08386063201446702
+    },
+    "held_out_robot/finetuned/bf16": {
+      "n": 1505,
+      "accuracy": {
+        "mean": 0.5395348837209303,
+        "lo": 0.5083137125328557,
+        "hi": 0.5691735513009432
+      },
+      "macro_f1": 0.41496035522269503
+    },
+    "held_out_robot/text_only/bf16": {
+      "n": 1505,
+      "accuracy": {
+        "mean": 0.0504983388704319,
+        "lo": 0.035901874400361196,
+        "hi": 0.06600155440414507
+      },
+      "macro_f1": 0.005655393087026082
+    },
+    "held_out_robot/zero_shot/bf16": {
+      "n": 1505,
+      "accuracy": {
+        "mean": 0.12757475083056477,
+        "lo": 0.10578731570800957,
+        "hi": 0.1494672383919913
+      },
+      "macro_f1": 0.04752453769604052
+    },
+    "random_clip/finetuned/bf16": {
+      "n": 1476,
+      "accuracy": {
+        "mean": 0.7831978319783198,
+        "lo": 0.7618386852447963,
+        "hi": 0.8049941004004576
+      },
+      "macro_f1": 0.6654140431667721
+    },
+    "random_clip/text_only/bf16": {
+      "n": 1476,
+      "accuracy": {
+        "mean": 0.018970189701897018,
+        "lo": 0.011548717033413028,
+        "hi": 0.02736071810055656
+      },
+      "macro_f1": 0.002190237797246558
+    },
+    "random_clip/zero_shot/bf16": {
+      "n": 1476,
+      "accuracy": {
+        "mean": 0.17411924119241193,
+        "lo": 0.1545675727074284,
+        "hi": 0.1953037381042667
+      },
+      "macro_f1": 0.08104978982724222
+    },
+    "random_episode/finetuned/bf16": {
+      "n": 1509,
+      "accuracy": {
+        "mean": 0.7660702451954937,
+        "lo": 0.7424678249962832,
+        "hi": 0.7919954051075532
+      },
+      "macro_f1": 0.6562010820606289
+    },
+    "random_episode/finetuned/nf4": {
+      "n": 1509,
+      "accuracy": {
+        "mean": 0.7282968853545394,
+        "lo": 0.701646224323925,
+        "hi": 0.7535487232707543
+      },
+      "macro_f1": 0.6073173601467348
+    },
+    "random_episode/shuffled/bf16": {
+      "n": 1509,
+      "accuracy": {
+        "mean": 0.1862160371106693,
+        "lo": 0.1566410219850898,
+        "hi": 0.21495435630608561
+      },
+      "macro_f1": 0.01846861649687808
+    },
+    "random_episode/text_only/bf16": {
+      "n": 1509,
+      "accuracy": {
+        "mean": 0.01126573889993373,
+        "lo": 0.004013043478260869,
+        "hi": 0.020066889632107024
+      },
+      "macro_f1": 0.001310615989515072
+    },
+    "random_episode/zero_shot/bf16": {
+      "n": 1509,
+      "accuracy": {
+        "mean": 0.15308151093439365,
+        "lo": 0.1307508293140343,
+        "hi": 0.17577719015106308
+      },
+      "macro_f1": 0.06069701753621392
+    }
+  },
+  "success": {
+    "held_out_operator/finetuned/bf16": {
+      "n": 497,
+      "failure_rate": 0.008048289738430584,
+      "pr_auc_failure": 0.017518873948527323,
+      "roc_auc": 0.6823022312373225,
+      "accuracy": 0.9919517102615694
+    },
+    "held_out_operator/text_only/bf16": {
+      "n": 497,
+      "failure_rate": 0.008048289738430584,
+      "pr_auc_failure": 0.01626424396774088,
+      "roc_auc": 0.6741886409736308,
+      "accuracy": 0.6599597585513078
+    },
+    "held_out_operator/zero_shot/bf16": {
+      "n": 497,
+      "failure_rate": 0.008048289738430584,
+      "pr_auc_failure": 0.008827109023866662,
+      "roc_auc": 0.46526369168356996,
+      "accuracy": 0.48490945674044267
+    },
+    "held_out_robot/finetuned/bf16": {
+      "n": 495,
+      "failure_rate": 0.028282828282828285,
+      "pr_auc_failure": 0.050069482824964866,
+      "roc_auc": 0.6474606474606475,
+      "accuracy": 0.9717171717171718
+    },
+    "held_out_robot/text_only/bf16": {
+      "n": 495,
+      "failure_rate": 0.028282828282828285,
+      "pr_auc_failure": 0.056254175460299004,
+      "roc_auc": 0.5669735669735669,
+      "accuracy": 0.7070707070707071
+    },
+    "held_out_robot/zero_shot/bf16": {
+      "n": 495,
+      "failure_rate": 0.028282828282828285,
+      "pr_auc_failure": 0.04235828676223977,
+      "roc_auc": 0.4982922482922483,
+      "accuracy": 0.3212121212121212
+    },
+    "random_clip/finetuned/bf16": {
+      "n": 524,
+      "failure_rate": 0.03435114503816794,
+      "pr_auc_failure": 0.062273673412133065,
+      "roc_auc": 0.6927426438296004,
+      "accuracy": 0.9656488549618321
+    },
+    "random_clip/text_only/bf16": {
+      "n": 524,
+      "failure_rate": 0.03435114503816794,
+      "pr_auc_failure": 0.12981400555608544,
+      "roc_auc": 0.700592885375494,
+      "accuracy": 0.6679389312977099
+    },
+    "random_clip/zero_shot/bf16": {
+      "n": 524,
+      "failure_rate": 0.03435114503816794,
+      "pr_auc_failure": 0.04129648417554684,
+      "roc_auc": 0.5712011418533158,
+      "accuracy": 0.4026717557251908
+    },
+    "random_episode/finetuned/bf16": {
+      "n": 491,
+      "failure_rate": 0.032586558044806514,
+      "pr_auc_failure": 0.1520284464302369,
+      "roc_auc": 0.7661184210526316,
+      "accuracy": 0.9674134419551935
+    },
+    "random_episode/finetuned/nf4": {
+      "n": 491,
+      "failure_rate": 0.032586558044806514,
+      "pr_auc_failure": 0.1459428782875979,
+      "roc_auc": 0.7474999999999999,
+      "accuracy": 0.9674134419551935
+    },
+    "random_episode/shuffled/bf16": {
+      "n": 491,
+      "failure_rate": 0.032586558044806514,
+      "pr_auc_failure": 0.04750711866681081,
+      "roc_auc": 0.5301973684210526,
+      "accuracy": 0.9674134419551935
+    },
+    "random_episode/text_only/bf16": {
+      "n": 491,
+      "failure_rate": 0.032586558044806514,
+      "pr_auc_failure": 0.11330979671866823,
+      "roc_auc": 0.6613157894736842,
+      "accuracy": 0.6456211812627292
+    },
+    "random_episode/zero_shot/bf16": {
+      "n": 491,
+      "failure_rate": 0.032586558044806514,
+      "pr_auc_failure": 0.03333364444823527,
+      "roc_auc": 0.5328947368421053,
+      "accuracy": 0.4175152749490835
+    }
+  },
+  "majority": {
+    "random_clip": {
+      "class": "Place",
+      "accuracy": 0.2086720867208672,
+      "n": 1476
+    },
+    "random_episode": {
+      "class": "Place",
+      "accuracy": 0.1862160371106693,
+      "n": 1509
+    },
+    "held_out_operator": {
+      "class": "Pull",
+      "accuracy": 0.008649367930805056,
+      "n": 1503
+    },
+    "held_out_robot": {
+      "class": "Place",
+      "accuracy": 0.146843853820598,
+      "n": 1505
+    }
+  },
+  "gains": {
+    "random_clip: finetuned minus zero_shot": {
+      "mean": 0.6090785907859079,
+      "lo": 0.5778344130720743,
+      "hi": 0.6377306903622693
+    },
+    "random_clip: finetuned minus text_only": {
+      "mean": 0.7642276422764228,
+      "lo": 0.7398074578007271,
+      "hi": 0.7885306123466368
+    },
+    "random_episode: finetuned minus zero_shot": {
+      "mean": 0.6129887342611001,
+      "lo": 0.5827187704338751,
+      "hi": 0.6459739953907978
+    },
+    "random_episode: finetuned minus text_only": {
+      "mean": 0.75480450629556,
+      "lo": 0.7291663192128085,
+      "hi": 0.7833120129575732
+    },
+    "random_episode: finetuned minus shuffled": {
+      "mean": 0.5798542080848244,
+      "lo": 0.5449616848642692,
+      "hi": 0.6182056319580878
+    },
+    "held_out_operator: finetuned minus zero_shot": {
+      "mean": 0.40652029274783763,
+      "lo": 0.37333624099288526,
+      "hi": 0.43867157964309317
+    },
+    "held_out_operator: finetuned minus text_only": {
+      "mean": 0.6014637391882901,
+      "lo": 0.5719880794701986,
+      "hi": 0.6309162836366112
+    },
+    "held_out_robot: finetuned minus zero_shot": {
+      "mean": 0.4119601328903654,
+      "lo": 0.374748770675996,
+      "hi": 0.44788696517430515
+    },
+    "held_out_robot: finetuned minus text_only": {
+      "mean": 0.48903654485049836,
+      "lo": 0.4515590082440651,
+      "hi": 0.5262127591753012
+    }
+  },
+  "split_gap": {
+    "random_clip minus random_episode": {
+      "mean": 0.01712758678282611,
+      "lo": -0.01676667601792537,
+      "hi": 0.0501438740783551
+    },
+    "random_clip minus held_out_operator": {
+      "mean": 0.16975804488583812,
+      "lo": 0.1333433138244698,
+      "hi": 0.20362298097601553
+    },
+    "random_clip minus held_out_robot": {
+      "mean": 0.24366294825738954,
+      "lo": 0.2057157442108022,
+      "hi": 0.2826823255889537
+    }
+  },
+  "conformal": {
+    "held_out_operator": {
+      "calib_skills": 15,
+      "alpha": 0.1,
+      "n_calib": 1498,
+      "qhat": 0.9547242857515812,
+      "test_coverage": 0.8922155688622755,
+      "mean_set_size": 2.2721224218230205,
+      "n_test": 1503
+    },
+    "held_out_robot": {
+      "calib_skills": 1,
+      "alpha": 0.1,
+      "n_calib": 1095,
+      "qhat": 0.01370382308959961,
+      "test_coverage": 0.16212624584717608,
+      "mean_set_size": 0.17541528239202658,
+      "n_test": 1505
+    },
+    "random_clip": {
+      "calib_skills": 17,
+      "alpha": 0.1,
+      "n_calib": 1436,
+      "qhat": 0.7606360763311386,
+      "test_coverage": 0.9010840108401084,
+      "mean_set_size": 1.348238482384824,
+      "n_test": 1476
+    },
+    "random_episode": {
+      "calib_skills": 17,
+      "alpha": 0.1,
+      "n_calib": 1425,
+      "qhat": 0.7597676068544388,
+      "test_coverage": 0.8860172299536117,
+      "mean_set_size": 1.3618290258449304,
+      "n_test": 1509
+    }
+  },
+  "latency": {
+    "held_out_operator/finetuned/bf16": {
+      "median_ms": 90.84326296579093,
+      "p90_ms": 92.1974936965853,
+      "peak_gib": 4.135316848754883
+    },
+    "held_out_operator/text_only/bf16": {
+      "median_ms": 17.90064200758934,
+      "p90_ms": 19.08091929508373,
+      "peak_gib": 3.9819650650024414
+    },
+    "held_out_operator/zero_shot/bf16": {
+      "median_ms": 76.73787302337587,
+      "p90_ms": 77.87944255396724,
+      "peak_gib": 4.053926467895508
+    },
+    "held_out_robot/finetuned/bf16": {
+      "median_ms": 90.87063098559156,
+      "p90_ms": 92.21837822115049,
+      "peak_gib": 4.135316848754883
+    },
+    "held_out_robot/text_only/bf16": {
+      "median_ms": 17.928998509887606,
+      "p90_ms": 19.02214790461585,
+      "peak_gib": 3.9819650650024414
+    },
+    "held_out_robot/zero_shot/bf16": {
+      "median_ms": 76.59545150818303,
+      "p90_ms": 77.83238379051909,
+      "peak_gib": 4.053926467895508
+    },
+    "random_clip/finetuned/bf16": {
+      "median_ms": 90.95265896758065,
+      "p90_ms": 92.33111757785082,
+      "peak_gib": 4.135316848754883
+    },
+    "random_clip/text_only/bf16": {
+      "median_ms": 17.88773701991886,
+      "p90_ms": 18.984098790679127,
+      "peak_gib": 3.9819650650024414
+    },
+    "random_clip/zero_shot/bf16": {
+      "median_ms": 76.55299705220386,
+      "p90_ms": 77.82956764567643,
+      "peak_gib": 4.053926467895508
+    },
+    "random_episode/finetuned/bf16": {
+      "median_ms": 91.07400599168614,
+      "p90_ms": 92.39995592506602,
+      "peak_gib": 4.135316848754883
+    },
+    "random_episode/finetuned/nf4": {
+      "median_ms": 101.02500702487305,
+      "p90_ms": 102.4400855996646,
+      "peak_gib": 1.7237777709960938
+    },
+    "random_episode/shuffled/bf16": {
+      "median_ms": 90.83885693689808,
+      "p90_ms": 92.14525875868276,
+      "peak_gib": 4.135316848754883
+    },
+    "random_episode/text_only/bf16": {
+      "median_ms": 17.900689505040646,
+      "p90_ms": 19.04614761006087,
+      "peak_gib": 3.9819650650024414
+    },
+    "random_episode/zero_shot/bf16": {
+      "median_ms": 76.70529396273196,
+      "p90_ms": 77.90740756317973,
+      "peak_gib": 4.053926467895508
+    }
+  },
+  "mix_adjusted": {
+    "random_clip": {
+      "accuracy": 0.7812650245862334,
+      "skills_present": 17,
+      "reference_weight_covered": 0.9999999999999999
+    },
+    "random_episode": {
+      "accuracy": 0.7660702451954937,
+      "skills_present": 17,
+      "reference_weight_covered": 0.9999999999999999
+    },
+    "held_out_operator": {
+      "accuracy": 0.6478560795232673,
+      "skills_present": 15,
+      "reference_weight_covered": 0.9721669980119284
+    },
+    "held_out_robot": {
+      "accuracy": 0.5374654324668049,
+      "skills_present": 17,
+      "reference_weight_covered": 0.9999999999999999
+    }
+  },
+  "conformal_new_group": {
+    "held_out_operator": {
+      "alpha": 0.1,
+      "n_calib": 744,
+      "qhat": 0.9581415168941021,
+      "test_coverage": 0.8932806324110671,
+      "mean_set_size": 2.33596837944664,
+      "n_test": 759
+    },
+    "held_out_robot": {
+      "alpha": 0.1,
+      "n_calib": 754,
+      "qhat": 0.9951008069328964,
+      "test_coverage": 0.9121171770972037,
+      "mean_set_size": 4.392809587217044,
+      "n_test": 751
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "dataset": "lerobot/libero",
+  "synthetic_groups_and_success": true,
+  "n_episodes": 1693,
+  "n_episodes_with_downloaded_video": 110,
+  "fps": 10.0,
+  "skill_counts": {
+    "Pick": 927,
+    "Put": 563,
+    "Turn": 91,
+    "Open": 79,
+    "Push": 33
+  },
+  "n_skills": 5,
+  "majority_skill_share": 0.5475487300649734,
+  "success_rate": 0.8381571175428234,
+  "n_failures": 274,
+  "n_instructions": 40,
+  "missing_instruction": 0,
+  "synonym_verb_episodes": {
+    "Pick": 927,
+    "Take": 0,
+    "Put": 563
+  },
+  "operators": {
+    "n": 5,
+    "largest_share": 0.2132309509746013
+  },
+  "robots": {
+    "n": 4,
+    "largest_share": 0.2640283520378027
+  },
+  "episodes_per_uuid": {
+    "max": 1,
+    "n_uuids": 1693
+  },
+  "duration_s": {
+    "median": 14.0,
+    "p1": 8.292000000000002,
+    "p99": 39.82399999999998,
+    "under_1s": 0,
+    "over_60s": 0
+  },
+  "video_vs_length_mismatch_over_0.5s": 0
+}

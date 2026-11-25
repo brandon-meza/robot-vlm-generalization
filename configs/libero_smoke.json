@@ -1,0 +1,43 @@
+{
+  "name": "libero_smoke",
+  "repo_id": "lerobot/libero",
+  "camera_key": "observation.images.image",
+  "max_video_files": 3,
+  "skill_label": "first_verb_of_task",
+  "merge_synonyms": false,
+  "success_field": null,
+  "instruction_field": "tasks",
+  "group_fields": {
+    "operator": "synthetic_operator",
+    "robot": "synthetic_robot",
+    "episode": "episode_index"
+  },
+  "synthetic_groups": true,
+  "synthetic_success_rate": 0.15,
+  "clips_per_episode": 3,
+  "frames_per_clip": 4,
+  "frame_size": [
+    256,
+    256
+  ],
+  "rotate_180": true,
+  "success_window": 0.3,
+  "test_fraction": 0.2,
+  "calib_fraction": 0.1,
+  "max_group_share_in_test": 0.5,
+  "max_train_samples": 600,
+  "max_test_samples": 150,
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "lr": 0.0002,
+  "batch_size": 4,
+  "grad_accum": 2,
+  "epochs": 1,
+  "max_steps": 60,
+  "conformal_alpha": 0.1,
+  "bootstrap_samples": 500,
+  "latency_samples": 20,
+  "seed": 0
+}

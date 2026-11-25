@@ -1,0 +1,54 @@
+{
+  "random_clip": {
+    "n_train": 310,
+    "n_calib": 43,
+    "n_test": 87,
+    "test_samples_whose_episode_is_in_train": 0.9425287356321839,
+    "test_skill_samples_with_class_unseen_in_train": 0,
+    "after_cap": {
+      "train": 310,
+      "test": 87,
+      "calib": 43
+    }
+  },
+  "random_episode": {
+    "n_train": 308,
+    "n_calib": 44,
+    "n_test": 88,
+    "test_samples_whose_episode_is_in_train": 0.0,
+    "test_groups": 22,
+    "test_skill_samples_with_class_unseen_in_train": 0,
+    "after_cap": {
+      "train": 308,
+      "test": 88,
+      "calib": 44
+    }
+  },
+  "held_out_operator": {
+    "n_train": 256,
+    "n_calib": 108,
+    "n_test": 76,
+    "test_samples_whose_episode_is_in_train": 0.0,
+    "test_groups": 1,
+    "test_skill_samples_with_class_unseen_in_train": 0,
+    "after_cap": {
+      "train": 256,
+      "calib": 108,
+      "test": 76
+    }
+  },
+  "held_out_robot": {
+    "n_train": 240,
+    "n_calib": 104,
+    "n_test": 96,
+    "test_samples_whose_episode_is_in_train": 0.0,
+    "test_groups": 1,
+    "test_skill_samples_with_class_unseen_in_train": 0,
+    "after_cap": {
+      "train": 240,
+      "calib": 104,
+      "test": 96
+    }
+  },
+  "note": "group leakage asserts passed for every grouped split"
+}

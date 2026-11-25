@@ -1,0 +1,63 @@
+{
+  "dataset": "airoa-org/airoa-moma",
+  "synthetic_groups_and_success": false,
+  "n_episodes": 23762,
+  "n_episodes_with_downloaded_video": 4705,
+  "fps": 30,
+  "skill_counts": {
+    "Grab": 3252,
+    "Place": 3197,
+    "Open": 3182,
+    "Close": 1897,
+    "Put": 1852,
+    "Press": 1542,
+    "Pick": 1525,
+    "Pull": 1464,
+    "Hang": 1276,
+    "Fold": 1195,
+    "Push": 1010,
+    "Take": 747,
+    "Approach": 426,
+    "Move": 421,
+    "Insert": 343,
+    "Remove": 226,
+    "Run": 207
+  },
+  "n_skills": 17,
+  "majority_skill_share": 0.13685716690514266,
+  "success_rate": 0.9747496002020032,
+  "n_failures": 600,
+  "n_instructions": 47,
+  "missing_instruction": 0,
+  "synonym_verb_episodes": {
+    "Pick": 1525,
+    "Take": 747,
+    "Put": 1852
+  },
+  "operators": {
+    "n": 19,
+    "largest_share": 0.4821563841427489
+  },
+  "robots": {
+    "n": 8,
+    "largest_share": 0.34121706927026346
+  },
+  "episodes_per_uuid": {
+    "max": 26,
+    "n_uuids": 4183
+  },
+  "duration_s": {
+    "median": 11.6,
+    "p1": 2.4,
+    "p99": 30.5,
+    "under_1s": 0,
+    "over_60s": 0
+  },
+  "video_vs_length_mismatch_over_0.5s": 0,
+  "instruction_not_in_primitive_action": 0,
+  "n_locations": 1,
+  "skills_per_operator": {
+    "min": 1,
+    "max": 17
+  }
+}

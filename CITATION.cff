@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code, please cite it and the airoa-org/airoa-moma dataset.
+title: "robot-vlm-generalization"
+abstract: >-
+  Leakage-safe fine-tuning and evaluation of a vision-language model (Qwen3-VL-2B, LoRA) on real robot video:
+  skill recognition and success detection, with splits held out by operator and by robot, controls,
+  conformal prediction sets and 4-bit inference.
+type: software
+authors:
+  - family-names: "Meza-González"
+    given-names: "Brandon"
+    orcid: "https://orcid.org/0000-0003-4500-5721"
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/brandon-meza/robot-vlm-generalization"
+keywords:
+  - vision-language models
+  - robotics
+  - LoRA
+  - evaluation
+  - conformal prediction
