@@ -1,29 +1,29 @@
-Skill accuracy (%) on the test part, 95% bootstrap interval over episodes.
+Skill accuracy (%) on the test part, 95% bootstrap interval over recording sessions (uuid).
 
 | Split | Majority | Text only | Zero-shot | Fine-tuned | Shuffled-label FT |
 |---|---|---|---|---|---|
-| random_clip | 20.9 | 1.9 [1.2, 2.7] | 17.4 [15.5, 19.5] | 78.3 [76.2, 80.5] | not run |
-| random_episode | 18.6 | 1.1 [0.4, 2.0] | 15.3 [13.1, 17.6] | 76.6 [74.2, 79.2] | 18.6 [15.7, 21.5] |
-| held_out_operator | 0.9 | 1.2 [0.5, 2.0] | 20.7 [18.4, 23.1] | 61.3 [58.5, 64.0] | not run |
-| held_out_robot | 14.7 | 5.0 [3.6, 6.6] | 12.8 [10.6, 14.9] | 54.0 [50.8, 56.9] | not run |
+| random_clip | 20.9 | 1.9 [1.2, 2.7] | 17.4 [15.6, 19.4] | 78.3 [76.0, 80.6] | not run |
+| random_episode | 18.6 | 1.1 [0.5, 1.9] | 15.3 [13.5, 17.0] | 76.6 [73.7, 79.4] | 18.6 [16.5, 20.7] |
+| held_out_operator | 0.9 | 1.2 [0.5, 2.1] | 20.7 [18.8, 22.6] | 61.3 [58.0, 64.6] | not run |
+| held_out_robot | 14.7 | 5.0 [4.0, 6.1] | 12.8 [10.8, 14.6] | 54.0 [50.4, 57.9] | not run |
 
 | Split gap, fine-tuned (points) | Value |
 |---|---|
-| random_clip minus random_episode | 1.7 [-1.7, 5.0] |
-| random_clip minus held_out_operator | 17.0 [13.3, 20.4] |
-| random_clip minus held_out_robot | 24.4 [20.6, 28.3] |
+| random_clip minus random_episode | 1.7 [-1.9, 5.4] |
+| random_clip minus held_out_operator | 17.0 [12.9, 21.2] |
+| random_clip minus held_out_robot | 24.4 [19.5, 28.6] |
 
 | Gain (points, paired) | Value |
 |---|---|
-| random_clip: finetuned minus zero_shot | 60.9 [57.8, 63.8] |
-| random_clip: finetuned minus text_only | 76.4 [74.0, 78.9] |
-| random_episode: finetuned minus zero_shot | 61.3 [58.3, 64.6] |
-| random_episode: finetuned minus text_only | 75.5 [72.9, 78.3] |
-| random_episode: finetuned minus shuffled | 58.0 [54.5, 61.8] |
-| held_out_operator: finetuned minus zero_shot | 40.7 [37.3, 43.9] |
-| held_out_operator: finetuned minus text_only | 60.1 [57.2, 63.1] |
-| held_out_robot: finetuned minus zero_shot | 41.2 [37.5, 44.8] |
-| held_out_robot: finetuned minus text_only | 48.9 [45.2, 52.6] |
+| random_clip: finetuned minus zero_shot | 60.9 [57.9, 63.8] |
+| random_clip: finetuned minus text_only | 76.4 [73.9, 79.0] |
+| random_episode: finetuned minus zero_shot | 61.3 [58.0, 64.6] |
+| random_episode: finetuned minus text_only | 75.5 [72.5, 78.4] |
+| random_episode: finetuned minus shuffled | 58.0 [54.9, 61.3] |
+| held_out_operator: finetuned minus zero_shot | 40.7 [37.3, 44.1] |
+| held_out_operator: finetuned minus text_only | 60.1 [56.5, 63.7] |
+| held_out_robot: finetuned minus zero_shot | 41.2 [36.5, 46.3] |
+| held_out_robot: finetuned minus text_only | 48.9 [44.8, 53.5] |
 
 | Success detection | n | failure rate | PR-AUC (failure) | ROC-AUC |
 |---|---|---|---|---|
@@ -44,17 +44,17 @@ Skill accuracy (%) on the test part, 95% bootstrap interval over episodes.
 
 | Conformal sets (alpha = 0.1), calibration part of the split | coverage | mean set size | n calib | skills in calib |
 |---|---|---|---|---|
-| held_out_operator | 0.892 | 2.27 | 1498 | 15 |
-| held_out_robot | 0.162 | 0.18 | 1095 | 1 |
+| held_out_operator | 0.891 | 2.26 | 1498 | 15 |
+| held_out_robot | 0.162 | 0.17 | 1095 | 1 |
 | random_clip | 0.901 | 1.35 | 1436 | 17 |
-| random_episode | 0.886 | 1.36 | 1425 | 17 |
+| random_episode | 0.885 | 1.36 | 1425 | 17 |
 
 Coverage holds only when calibration and test samples are exchangeable. A calibration part with few skills (e.g. one robot that only did one skill) breaks this.
 
-| Conformal sets, calibrated on half of the new groups' test episodes | coverage | mean set size | n calib | n test |
+| Conformal sets, calibrated on half of the new groups' test sessions | coverage | mean set size | n calib | n test |
 |---|---|---|---|---|
-| held_out_operator | 0.893 | 2.34 | 744 | 759 |
-| held_out_robot | 0.912 | 4.39 | 754 | 751 |
+| held_out_operator | 0.907 | 2.42 | 790 | 713 |
+| held_out_robot | 0.895 | 3.95 | 732 | 773 |
 
 | Fine-tuned skill accuracy re-weighted to the random_episode skill mix | accuracy (%) | skills present | reference weight covered |
 |---|---|---|---|

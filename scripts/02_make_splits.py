@@ -60,7 +60,11 @@ def pick_groups(sizes: pd.Series, salt: str, target: float, max_share: float, ex
         chosen.add(g)
         share += sizes[g] / total
     if not chosen:  # few large groups: take the first allowed one even if it overshoots
-        chosen = {next(g for g in order if g not in exclude and sizes[g] / total <= max_share)}
+        allowed = [g for g in order if g not in exclude and sizes[g] / total <= max_share]
+        if not allowed:
+            raise ValueError(f"{salt}: every group is larger than max_group_share_in_test={max_share} "
+                             "(or already used); lower the share or use another grouping key")
+        chosen = {allowed[0]}
     return chosen
 
 
@@ -88,6 +92,9 @@ def check_leakage(df: pd.DataFrame, split: str, key: str | None) -> dict:
         assert not (set(tr[key]) & set(te[key])), f"{split}: group leak train/test"
         assert not (set(tr[key]) & set(ca[key])), f"{split}: group leak train/calib"
         assert not shared_ep, f"{split}: uuid leak"
+        # The calibration part feeds the conformal sets, so it must be as separate as the test part.
+        assert not (set(tr.g_episode) & set(ca.g_episode)), f"{split}: uuid leak train/calib"
+        assert not (set(ca.g_episode) & set(te.g_episode)), f"{split}: uuid leak calib/test"
         report["test_groups"] = int(te[key].nunique())
     unseen = ~te["skill"].isin(set(tr["skill"]))
     report["test_skill_samples_with_class_unseen_in_train"] = int((unseen & (te.task == "skill")).sum())

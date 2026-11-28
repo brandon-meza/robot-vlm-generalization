@@ -4,14 +4,16 @@ Inputs : runs/<name>/preds/*.parquet, runs/<name>/splits/*.parquet
 Outputs: results/<name>/metrics.json, results/<name>/results_table.md,
          figures/<name>_*.png, runs/<name>/review/ (error sheet for a hand check)
 
-Confidence intervals: bootstrap over EPISODES (all samples of an episode are
-drawn together, because they are not independent).
+Confidence intervals: bootstrap over RECORDING SESSIONS (g_episode: the uuid on
+airoa-moma; one session holds up to dozens of episodes). All samples of a
+session are drawn together, because they are not independent.
   - Gain of one model over another on the same split: paired bootstrap.
   - Gap between two splits (different test sets): each test set resampled
     independently, then the difference is taken.
 Conformal prediction (split conformal, skill task): the non-conformity score
-is 1 - p(true class) on the calibration part; the threshold is its
-ceil((n+1)(1-alpha))/n quantile; the prediction set on a test sample is every
+is 1 - p(true class) on the calibration part; the threshold is its k-th
+smallest value, k = ceil((n+1)(1-alpha)) (no finite threshold if k > n, so
+the set is every class); the prediction set on a test sample is every
 class with 1 - p <= threshold. Coverage is guaranteed (>= 1 - alpha) only if
 calibration and test samples are exchangeable.
 """
@@ -46,6 +48,13 @@ def episode_bootstrap(groups, fn, n, seed):
     return out
 
 
+def conformal_threshold(scores, alpha):
+    """k-th smallest calibration score, k = ceil((n + 1)(1 - alpha)); +inf (full set) when k > n."""
+    n = len(scores)
+    k = int(np.ceil((n + 1) * (1 - alpha)))
+    return float("inf") if n == 0 or k > n else float(np.sort(scores)[k - 1])
+
+
 def ci(vals, point):
     return {"mean": float(point), "lo": float(np.nanpercentile(vals, 2.5)), "hi": float(np.nanpercentile(vals, 97.5))}
 
@@ -55,10 +64,15 @@ def main() -> None:
     nb, seed = cfg["bootstrap_samples"], cfg["seed"]
     classes = skill_classes(cfg)
     pdir = cfg["run_dir"] / "preds"
+    ep = pd.read_parquet(cfg["run_dir"] / "episodes.parquet")
+    session_of = dict(zip(ep.episode_index, ep.g_episode))   # bootstrap and calibration unit
     preds = {}
     for f in sorted(pdir.glob("*.parquet")):
         split, mode, quant = f.stem.split("__")
-        preds[(split, mode, quant)] = pd.read_parquet(f)
+        df = pd.read_parquet(f)
+        df["session"] = df.episode_index.map(session_of)
+        assert df.session.notna().all(), f"{f.name}: episode without a recording session"
+        preds[(split, mode, quant)] = df
     m = {"dataset": cfg["repo_id"], "synthetic_labels_and_groups": bool(cfg["synthetic_groups"]),
          "skill": {}, "success": {}, "majority": {}, "gains": {}, "split_gap": {}, "conformal": {},
          "latency": {}}
@@ -70,9 +84,12 @@ def main() -> None:
         su = te[te.task == "success"].reset_index(drop=True)
         key = f"{split}/{mode}/{quant}"
         correct = (sk.label == sk.pred).to_numpy().astype(float)
-        acc_b = episode_bootstrap(sk.episode_index, lambda ix: correct[ix].mean(), nb, seed)
-        m["skill"][key] = {"n": int(len(sk)), "accuracy": ci(acc_b, correct.mean()),
-                           "macro_f1": float(f1_score(sk.label, sk.pred, average="macro", labels=classes, zero_division=0))}
+        acc_b = episode_bootstrap(sk.session, lambda ix: correct[ix].mean(), nb, seed)
+        present = sorted(set(sk.label) | set(sk.pred))   # a skill absent from both is not scored as F1 = 0
+        m["skill"][key] = {"n": int(len(sk)), "n_sessions": int(sk.session.nunique()),
+                           "accuracy": ci(acc_b, correct.mean()),
+                           "macro_f1": float(f1_score(sk.label, sk.pred, average="macro", labels=present, zero_division=0)),
+                           "macro_f1_classes": len(present)}
         test_sets[key] = (sk, correct)
         if len(su) and su.label.nunique() == 2:
             fail = (su.label == "No").to_numpy().astype(int)
@@ -107,19 +124,19 @@ def main() -> None:
             sk_o, c_o = test_sets[ok]
             assert (sk_o.sample_key.to_numpy() == sk_ft.sample_key.to_numpy()).all(), "unpaired samples"
             d = c_ft - c_o
-            b = episode_bootstrap(sk_ft.episode_index, lambda ix: d[ix].mean(), nb, seed)
+            b = episode_bootstrap(sk_ft.session, lambda ix: d[ix].mean(), nb, seed)
             m["gains"][f"{split}: finetuned minus {other}"] = ci(b, d.mean())
 
     # Split gap: random_clip vs each harder split (independent bootstraps)
     base = "random_clip/finetuned/bf16"
     if base in test_sets:
         sk0, c0 = test_sets[base]
-        b0 = episode_bootstrap(sk0.episode_index, lambda ix: c0[ix].mean(), nb, seed)
+        b0 = episode_bootstrap(sk0.session, lambda ix: c0[ix].mean(), nb, seed)
         for split in SPLITS[1:]:
             k = f"{split}/finetuned/bf16"
             if k in test_sets:
                 sk1, c1 = test_sets[k]
-                b1 = episode_bootstrap(sk1.episode_index, lambda ix: c1[ix].mean(), nb, seed + 1)
+                b1 = episode_bootstrap(sk1.session, lambda ix: c1[ix].mean(), nb, seed + 1)
                 m["split_gap"][f"random_clip minus {split}"] = ci(b0 - b1, c0.mean() - c1.mean())
 
     # Task-mix check: the held-out splits test a different mix of skills, so part of
@@ -146,18 +163,22 @@ def main() -> None:
     for (split, mode, quant), df in preds.items():
         if mode != "finetuned" or quant != "bf16" or not split.startswith("held_out"):
             continue
-        # Variant: calibrate on half of the TEST episodes (same new operators/robots),
+        # Variant: calibrate on half of the TEST recording sessions (same new operators/robots),
         # evaluate on the other half. This is the realistic recipe for a new robot:
-        # label a few of its episodes first, then calibrate.
+        # label a few of its sessions first, then calibrate. Whole sessions go to one half,
+        # so near-duplicate episodes never calibrate their own siblings.
         te_all = df[(df.task == "skill") & (df.part == "test")]
-        eps = np.array(sorted(te_all.episode_index.unique()))
-        np.random.default_rng(seed).shuffle(eps)
-        cal_eps = set(eps[: len(eps) // 2])
-        cal = te_all[te_all.episode_index.isin(cal_eps)]
-        te = te_all[~te_all.episode_index.isin(cal_eps)]
+        sess = np.array(sorted(te_all.session.unique()))
+        if len(sess) < 2:
+            m["conformal_new_group"][split] = {"skipped": f"{len(sess)} test session(s); need at least 2"}
+            continue
+        np.random.default_rng(seed).shuffle(sess)
+        cal_sess = set(sess[: len(sess) // 2])
+        cal = te_all[te_all.session.isin(cal_sess)]
+        te = te_all[~te_all.session.isin(cal_sess)]
         s_cal = np.array([1 - p[classes.index(l)] for p, l in zip(cal.probs, cal.label)])
         n = len(s_cal)
-        qhat = np.quantile(s_cal, min(1.0, np.ceil((n + 1) * (1 - alpha)) / n), method="higher")
+        qhat = conformal_threshold(s_cal, alpha)
         sets = [[c for c, p in zip(classes, ps) if 1 - p <= qhat] for ps in te.probs]
         cover = np.array([l in st for l, st in zip(te.label, sets)])
         m["conformal_new_group"][split] = {"alpha": alpha, "n_calib": int(n), "qhat": float(qhat),
@@ -173,7 +194,7 @@ def main() -> None:
             continue
         s_cal = np.array([1 - p[classes.index(l)] for p, l in zip(cal.probs, cal.label)])
         n = len(s_cal)
-        qhat = np.quantile(s_cal, min(1.0, np.ceil((n + 1) * (1 - alpha)) / n), method="higher")
+        qhat = conformal_threshold(s_cal, alpha)
         sets = [[c for c, p in zip(classes, ps) if 1 - p <= qhat] for ps in te.probs]
         cover = np.array([l in st for l, st in zip(te.label, sets)])
         m["conformal"][split] = {"calib_skills": int(cal.label.nunique()),
@@ -200,7 +221,8 @@ def write_table(m, cfg, rd):
     if m["synthetic_labels_and_groups"]:
         L += ["**Smoke test only.** Operator/robot groups and success labels are synthetic; "
               "the numbers only prove the pipeline runs.", ""]
-    L += ["Skill accuracy (%) on the test part, 95% bootstrap interval over episodes.", "",
+    unit = "episodes" if m["synthetic_labels_and_groups"] else "recording sessions (uuid)"
+    L += [f"Skill accuracy (%) on the test part, 95% bootstrap interval over {unit}.", "",
           "| Split | Majority | Text only | Zero-shot | Fine-tuned | Shuffled-label FT |", "|---|---|---|---|---|---|"]
     for split in SPLITS:
         if split not in m["majority"]:
@@ -228,9 +250,10 @@ def write_table(m, cfg, rd):
         L += ["", "Coverage holds only when calibration and test samples are exchangeable. A calibration "
               "part with few skills (e.g. one robot that only did one skill) breaks this."]
     if m.get("conformal_new_group"):
-        L += ["", f"| Conformal sets, calibrated on half of the new groups' test episodes | coverage | mean set size | n calib | n test |",
+        L += ["", f"| Conformal sets, calibrated on half of the new groups' test sessions | coverage | mean set size | n calib | n test |",
               "|---|---|---|---|---|"]
         L += [f"| {k} | {v['test_coverage']:.3f} | {v['mean_set_size']:.2f} | {v['n_calib']} | {v['n_test']} |"
+              if "skipped" not in v else f"| {k} | not computed: {v['skipped']} | | | |"
               for k, v in m["conformal_new_group"].items()]
     if m.get("mix_adjusted"):
         L += ["", "| Fine-tuned skill accuracy re-weighted to the random_episode skill mix | accuracy (%) | skills present | reference weight covered |",

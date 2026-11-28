@@ -4,28 +4,28 @@ Skill accuracy (%) on the test part, 95% bootstrap interval over episodes.
 
 | Split | Majority | Text only | Zero-shot | Fine-tuned | Shuffled-label FT |
 |---|---|---|---|---|---|
-| random_clip | 78.5 | 9.2 [1.6, 17.7] | 13.8 [7.4, 22.5] | 90.8 [82.3, 98.4] | not run |
+| random_clip | 78.5 | 9.2 [1.5, 17.7] | 13.8 [6.2, 22.4] | 90.8 [82.3, 98.5] | not run |
 | random_episode | 81.8 | 9.1 [0.0, 22.7] | 15.2 [4.5, 27.3] | 98.5 [95.5, 100.0] | 81.8 [63.6, 95.5] |
-| held_out_operator | 78.9 | 15.8 [0.0, 36.8] | 21.1 [7.9, 39.5] | 84.2 [63.2, 100.0] | not run |
-| held_out_robot | 70.8 | 16.7 [4.2, 33.3] | 18.1 [6.9, 31.9] | 83.3 [66.7, 95.8] | not run |
+| held_out_operator | 78.9 | 15.8 [0.0, 36.8] | 21.1 [8.8, 38.6] | 84.2 [63.2, 100.0] | not run |
+| held_out_robot | 70.8 | 16.7 [4.2, 31.4] | 18.1 [5.6, 31.9] | 83.3 [68.6, 95.8] | not run |
 
 | Split gap, fine-tuned (points) | Value |
 |---|---|
-| random_clip minus random_episode | -7.7 [-16.1, 0.7] |
-| random_clip minus held_out_operator | 6.6 [-8.5, 26.4] |
-| random_clip minus held_out_robot | 7.4 [-9.5, 24.7] |
+| random_clip minus random_episode | -7.7 [-17.1, -0.0] |
+| random_clip minus held_out_operator | 6.6 [-10.6, 25.7] |
+| random_clip minus held_out_robot | 7.4 [-7.6, 26.1] |
 
 | Gain (points, paired) | Value |
 |---|---|
-| random_clip: finetuned minus zero_shot | 76.9 [62.1, 89.4] |
-| random_clip: finetuned minus text_only | 81.5 [64.6, 96.8] |
+| random_clip: finetuned minus zero_shot | 76.9 [61.8, 89.9] |
+| random_clip: finetuned minus text_only | 81.5 [64.5, 96.9] |
 | random_episode: finetuned minus zero_shot | 83.3 [71.2, 93.9] |
 | random_episode: finetuned minus text_only | 89.4 [76.5, 100.0] |
 | random_episode: finetuned minus shuffled | 16.7 [0.7, 36.4] |
-| held_out_operator: finetuned minus zero_shot | 63.2 [26.3, 91.2] |
+| held_out_operator: finetuned minus zero_shot | 63.2 [28.1, 89.5] |
 | held_out_operator: finetuned minus text_only | 68.4 [26.3, 100.0] |
-| held_out_robot: finetuned minus zero_shot | 65.3 [36.8, 88.9] |
-| held_out_robot: finetuned minus text_only | 66.7 [33.3, 91.7] |
+| held_out_robot: finetuned minus zero_shot | 65.3 [38.2, 91.7] |
+| held_out_robot: finetuned minus text_only | 66.7 [37.3, 91.7] |
 
 | Success detection | n | failure rate | PR-AUC (failure) | ROC-AUC |
 |---|---|---|---|---|
@@ -44,12 +44,26 @@ Skill accuracy (%) on the test part, 95% bootstrap interval over episodes.
 | random_episode/text_only/bf16 | 22 | 0.136 | 0.154 | 0.456 |
 | random_episode/zero_shot/bf16 | 22 | 0.136 | 0.251 | 0.719 |
 
-| Conformal sets (alpha = 0.1) | coverage | mean set size | n calib |
+| Conformal sets (alpha = 0.1), calibration part of the split | coverage | mean set size | n calib | skills in calib |
+|---|---|---|---|---|
+| held_out_operator | 0.895 | 1.07 | 81 | 3 |
+| held_out_robot | 0.958 | 1.14 | 78 | 3 |
+| random_clip | 0.954 | 1.15 | 33 | 3 |
+| random_episode | 0.909 | 0.91 | 33 | 3 |
+
+Coverage holds only when calibration and test samples are exchangeable. A calibration part with few skills (e.g. one robot that only did one skill) breaks this.
+
+| Conformal sets, calibrated on half of the new groups' test sessions | coverage | mean set size | n calib | n test |
+|---|---|---|---|---|
+| held_out_operator | 0.867 | 1.07 | 27 | 30 |
+| held_out_robot | 0.944 | 1.03 | 36 | 36 |
+
+| Fine-tuned skill accuracy re-weighted to the random_episode skill mix | accuracy (%) | skills present | reference weight covered |
 |---|---|---|---|
-| held_out_operator | 0.895 | 1.07 | 81 |
-| held_out_robot | 0.972 | 1.15 | 78 |
-| random_clip | 0.969 | 1.28 | 33 |
-| random_episode | 0.909 | 0.91 | 33 |
+| random_clip | 90.9 | 3 | 1.00 |
+| random_episode | 98.5 | 3 | 1.00 |
+| held_out_operator | 90.9 | 3 | 1.00 |
+| held_out_robot | 90.9 | 3 | 1.00 |
 
 | Model variant | median latency (ms) | p90 (ms) | peak GPU memory (GiB) | skill accuracy |
 |---|---|---|---|---|

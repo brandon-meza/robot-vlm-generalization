@@ -13,7 +13,7 @@
     "episode": "uuid"
   },
   "synthetic_groups": false,
-  "synthetic_success_rate": null,
+  "synthetic_failure_rate": null,
   "clips_per_episode": 3,
   "frames_per_clip": 4,
   "frame_size": [
@@ -38,6 +38,5 @@
   "max_steps": null,
   "conformal_alpha": 0.1,
   "bootstrap_samples": 2000,
-  "latency_samples": 100,
   "seed": 0
 }

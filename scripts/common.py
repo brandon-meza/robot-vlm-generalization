@@ -94,7 +94,7 @@ def build_episode_table(cfg: dict) -> pd.DataFrame:
         t["success"] = raw[cfg["success_field"]].astype(bool).to_numpy()
     else:
         # SMOKE TEST ONLY: random but deterministic labels. A model should score at chance.
-        rate = cfg["synthetic_success_rate"]
+        rate = cfg["synthetic_failure_rate"]   # share of episodes labelled as failures
         t["success"] = [stable_hash(f"succ:{e}") % 1000 >= rate * 1000 for e in t.episode_index]
     return t
 

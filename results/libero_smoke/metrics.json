@@ -4,129 +4,157 @@
   "skill": {
     "held_out_operator/finetuned/bf16": {
       "n": 57,
+      "n_sessions": 19,
       "accuracy": {
         "mean": 0.8421052631578947,
         "lo": 0.631578947368421,
         "hi": 1.0
       },
-      "macro_f1": 0.38181818181818183
+      "macro_f1": 0.6363636363636364,
+      "macro_f1_classes": 3
     },
     "held_out_operator/text_only/bf16": {
       "n": 57,
+      "n_sessions": 19,
       "accuracy": {
         "mean": 0.15789473684210525,
         "lo": 0.0,
         "hi": 0.3684210526315789
       },
-      "macro_f1": 0.05454545454545454
+      "macro_f1": 0.0909090909090909,
+      "macro_f1_classes": 3
     },
     "held_out_operator/zero_shot/bf16": {
       "n": 57,
+      "n_sessions": 19,
       "accuracy": {
         "mean": 0.21052631578947367,
-        "lo": 0.07850877192982458,
-        "hi": 0.3951754385964908
+        "lo": 0.08771929824561403,
+        "hi": 0.38596491228070173
       },
-      "macro_f1": 0.17316162747293767
+      "macro_f1": 0.21645203434117208,
+      "macro_f1_classes": 4
     },
     "held_out_robot/finetuned/bf16": {
       "n": 72,
+      "n_sessions": 24,
       "accuracy": {
         "mean": 0.8333333333333334,
-        "lo": 0.6666666666666666,
+        "lo": 0.6864583333333334,
         "hi": 0.9583333333333334
       },
-      "macro_f1": 0.37894736842105264
+      "macro_f1": 0.6315789473684211,
+      "macro_f1_classes": 3
     },
     "held_out_robot/text_only/bf16": {
       "n": 72,
+      "n_sessions": 24,
       "accuracy": {
         "mean": 0.16666666666666666,
         "lo": 0.041666666666666664,
-        "hi": 0.3333333333333333
+        "hi": 0.3135416666666657
       },
-      "macro_f1": 0.05714285714285714
+      "macro_f1": 0.09523809523809523,
+      "macro_f1_classes": 3
     },
     "held_out_robot/zero_shot/bf16": {
       "n": 72,
+      "n_sessions": 24,
       "accuracy": {
         "mean": 0.18055555555555555,
-        "lo": 0.06944444444444445,
+        "lo": 0.05555555555555555,
         "hi": 0.3194444444444444
       },
-      "macro_f1": 0.14636174636174637
+      "macro_f1": 0.18295218295218296,
+      "macro_f1_classes": 4
     },
     "random_clip/finetuned/bf16": {
       "n": 65,
+      "n_sessions": 54,
       "accuracy": {
         "mean": 0.9076923076923077,
-        "lo": 0.8230313092979127,
-        "hi": 0.9838709677419355
+        "lo": 0.8225806451612904,
+        "hi": 0.9846153846153847
       },
-      "macro_f1": 0.3888888888888889
+      "macro_f1": 0.6481481481481481,
+      "macro_f1_classes": 3
     },
     "random_clip/text_only/bf16": {
       "n": 65,
+      "n_sessions": 54,
       "accuracy": {
         "mean": 0.09230769230769231,
-        "lo": 0.016129032258064516,
-        "hi": 0.17696869070208726
+        "lo": 0.015384615384615385,
+        "hi": 0.1774193548387097
       },
-      "macro_f1": 0.03380281690140845
+      "macro_f1": 0.056338028169014086,
+      "macro_f1_classes": 3
     },
     "random_clip/zero_shot/bf16": {
       "n": 65,
+      "n_sessions": 54,
       "accuracy": {
         "mean": 0.13846153846153847,
-        "lo": 0.07405070237050043,
-        "hi": 0.2248916706788637
+        "lo": 0.061995192307692314,
+        "hi": 0.224015697375193
       },
-      "macro_f1": 0.12117900314621625
+      "macro_f1": 0.15147375393277032,
+      "macro_f1_classes": 4
     },
     "random_episode/finetuned/bf16": {
       "n": 66,
+      "n_sessions": 22,
       "accuracy": {
         "mean": 0.9848484848484849,
         "lo": 0.9545454545454546,
         "hi": 1.0
       },
-      "macro_f1": 0.58274622573688
+      "macro_f1": 0.9712437095614667,
+      "macro_f1_classes": 3
     },
     "random_episode/finetuned/nf4": {
       "n": 66,
+      "n_sessions": 22,
       "accuracy": {
         "mean": 0.9545454545454546,
-        "lo": 0.8787878787878788,
+        "lo": 0.8939393939393939,
         "hi": 1.0
       },
-      "macro_f1": 0.5476392766112392
+      "macro_f1": 0.9127321276853987,
+      "macro_f1_classes": 3
     },
     "random_episode/shuffled/bf16": {
       "n": 66,
+      "n_sessions": 22,
       "accuracy": {
         "mean": 0.8181818181818182,
         "lo": 0.6363636363636364,
         "hi": 0.9545454545454546
       },
-      "macro_f1": 0.18
+      "macro_f1": 0.3,
+      "macro_f1_classes": 3
     },
     "random_episode/text_only/bf16": {
       "n": 66,
+      "n_sessions": 22,
       "accuracy": {
         "mean": 0.09090909090909091,
         "lo": 0.0,
         "hi": 0.22727272727272727
       },
-      "macro_f1": 0.03333333333333333
+      "macro_f1": 0.05555555555555555,
+      "macro_f1_classes": 3
     },
     "random_episode/zero_shot/bf16": {
       "n": 66,
+      "n_sessions": 22,
       "accuracy": {
         "mean": 0.15151515151515152,
         "lo": 0.045454545454545456,
         "hi": 0.2727272727272727
       },
-      "macro_f1": 0.16603174603174603
+      "macro_f1": 0.20753968253968252,
+      "macro_f1_classes": 4
     }
   },
   "success": {
@@ -254,13 +282,13 @@
   "gains": {
     "random_clip: finetuned minus zero_shot": {
       "mean": 0.7692307692307693,
-      "lo": 0.6209016393442623,
-      "hi": 0.8939393939393939
+      "lo": 0.6177976190476191,
+      "hi": 0.8986029411764705
     },
     "random_clip: finetuned minus text_only": {
       "mean": 0.8153846153846154,
-      "lo": 0.6460626185958255,
-      "hi": 0.967741935483871
+      "lo": 0.6451612903225806,
+      "hi": 0.9692307692307692
     },
     "random_episode: finetuned minus zero_shot": {
       "mean": 0.8333333333333334,
@@ -279,8 +307,8 @@
     },
     "held_out_operator: finetuned minus zero_shot": {
       "mean": 0.631578947368421,
-      "lo": 0.2631578947368421,
-      "hi": 0.9122807017543859
+      "lo": 0.2807017543859649,
+      "hi": 0.8947368421052632
     },
     "held_out_operator: finetuned minus text_only": {
       "mean": 0.6842105263157895,
@@ -289,61 +317,65 @@
     },
     "held_out_robot: finetuned minus zero_shot": {
       "mean": 0.6527777777777778,
-      "lo": 0.36770833333333336,
-      "hi": 0.8888888888888888
+      "lo": 0.38159722222222225,
+      "hi": 0.9166666666666666
     },
     "held_out_robot: finetuned minus text_only": {
       "mean": 0.6666666666666666,
-      "lo": 0.3333333333333333,
+      "lo": 0.3729166666666668,
       "hi": 0.9166666666666666
     }
   },
   "split_gap": {
     "random_clip minus random_episode": {
       "mean": -0.07715617715617717,
-      "lo": -0.16054080723198372,
-      "hi": 0.007080683897943146
+      "lo": -0.170729712995338,
+      "hi": -0.0002331002331001919
     },
     "random_clip minus held_out_operator": {
       "mean": 0.065587044534413,
-      "lo": -0.08517298231477158,
-      "hi": 0.26437693498452014
+      "lo": -0.10609857978279025,
+      "hi": 0.25698123966470876
     },
     "random_clip minus held_out_robot": {
       "mean": 0.07435897435897432,
-      "lo": -0.09453125,
-      "hi": 0.2469139928698752
+      "lo": -0.07603633844842288,
+      "hi": 0.2611421911421911
     }
   },
   "conformal": {
     "held_out_operator": {
+      "calib_skills": 3,
       "alpha": 0.1,
       "n_calib": 81,
-      "qhat": 0.7774367779493332,
+      "qhat": 0.7551788240671158,
       "test_coverage": 0.8947368421052632,
       "mean_set_size": 1.0701754385964912,
       "n_test": 57
     },
     "held_out_robot": {
+      "calib_skills": 3,
       "alpha": 0.1,
       "n_calib": 78,
-      "qhat": 0.8670874834060669,
-      "test_coverage": 0.9722222222222222,
-      "mean_set_size": 1.1527777777777777,
+      "qhat": 0.852017343044281,
+      "test_coverage": 0.9583333333333334,
+      "mean_set_size": 1.1388888888888888,
       "n_test": 72
     },
     "random_clip": {
+      "calib_skills": 3,
       "alpha": 0.1,
       "n_calib": 33,
-      "qhat": 0.9153427705168724,
-      "test_coverage": 0.9692307692307692,
-      "mean_set_size": 1.2769230769230768,
+      "qhat": 0.8941537067294121,
+      "test_coverage": 0.9538461538461539,
+      "mean_set_size": 1.1538461538461537,
       "n_test": 65
     },
     "random_episode": {
+      "calib_skills": 3,
       "alpha": 0.1,
       "n_calib": 33,
-      "qhat": 0.08760035037994385,
+      "qhat": 0.07843661308288574,
       "test_coverage": 0.9090909090909091,
       "mean_set_size": 0.9090909090909091,
       "n_test": 66
@@ -419,6 +451,46 @@
       "median_ms": 62.104903045110404,
       "p90_ms": 64.64657530887052,
       "peak_gib": 4.040439605712891
+    }
+  },
+  "mix_adjusted": {
+    "random_clip": {
+      "accuracy": 0.9090909090909092,
+      "skills_present": 3,
+      "reference_weight_covered": 1.0
+    },
+    "random_episode": {
+      "accuracy": 0.984848484848485,
+      "skills_present": 3,
+      "reference_weight_covered": 1.0
+    },
+    "held_out_operator": {
+      "accuracy": 0.9090909090909092,
+      "skills_present": 3,
+      "reference_weight_covered": 1.0
+    },
+    "held_out_robot": {
+      "accuracy": 0.9090909090909092,
+      "skills_present": 3,
+      "reference_weight_covered": 1.0
+    }
+  },
+  "conformal_new_group": {
+    "held_out_operator": {
+      "alpha": 0.1,
+      "n_calib": 27,
+      "qhat": 0.777454748749733,
+      "test_coverage": 0.8666666666666667,
+      "mean_set_size": 1.0666666666666667,
+      "n_test": 30
+    },
+    "held_out_robot": {
+      "alpha": 0.1,
+      "n_calib": 36,
+      "qhat": 0.8356132954359055,
+      "test_coverage": 0.9444444444444444,
+      "mean_set_size": 1.0277777777777777,
+      "n_test": 36
     }
   }
 }

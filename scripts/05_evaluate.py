@@ -43,6 +43,8 @@ def main() -> None:
     data = load_split(cfg, args.split)
     data = data[data.part.isin(["calib", "test"])].reset_index(drop=True)
     rows = []
+    # Latency: every calib and test sample is timed (no separate timing subset), first call included;
+    # with thousands of samples one cold-start call does not move the median or p90.
     for i, r in data.iterrows():
         r = r.to_dict()
         probs, ms = score(model, processor, messages(r, classes, cfg, args.mode != "text_only"), ids[r["task"]])

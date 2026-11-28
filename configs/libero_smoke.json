@@ -13,7 +13,7 @@
     "episode": "episode_index"
   },
   "synthetic_groups": true,
-  "synthetic_success_rate": 0.15,
+  "synthetic_failure_rate": 0.15,
   "clips_per_episode": 3,
   "frames_per_clip": 4,
   "frame_size": [
@@ -38,6 +38,5 @@
   "max_steps": 60,
   "conformal_alpha": 0.1,
   "bootstrap_samples": 500,
-  "latency_samples": 20,
   "seed": 0
 }
